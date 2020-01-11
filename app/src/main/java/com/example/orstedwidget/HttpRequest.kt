@@ -19,7 +19,18 @@ fun main() {
     val weeklyMap = getUsage(externalID!!, authToken!!, TimeInterval.weekly)
 
     println()
-    println("weekly: ${weeklyMap["data"].toString()}")
+    /**
+     * virker ikke
+     */
+    val weeklyData = weeklyMap["data"].toString()
+    println("weekly: $weeklyData")
+
+    val gson = Gson()
+    val type = object: TypeToken<Map<String, Any>>(){}.type
+    println("type er: $type")
+    val newMap: Map<String, Any> = gson.fromJson(weeklyData, type)
+
+    println("\n nyt map: $newMap")
 }
 
 enum class TimeInterval {
