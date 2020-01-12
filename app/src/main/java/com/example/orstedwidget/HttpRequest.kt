@@ -6,13 +6,17 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 fun main() {
     val email = ""
     val pass = ""
 
+    //saves the return of the authentication in a Map
     val map = authenticate(email, pass)
+    //externalID and token is how you retrieve data from the other API calls
     val externalID = map["external_id"]
     val authToken = map["token"]
 
@@ -22,15 +26,25 @@ fun main() {
     /**
      * virker ikke
      */
-    val weeklyData = weeklyMap["data"].toString()
-    println("weekly: $weeklyData")
 
-    val gson = Gson()
-    val type = object: TypeToken<Map<String, Any>>(){}.type
-    println("type er: $type")
-    val newMap: Map<String, Any> = gson.fromJson(weeklyData, type)
+    //println("size er: ${weeklyMap}")
 
-    println("\n nyt map: $newMap")
+    val test: Collection<String> = weeklyMap.values
+
+    val hej = arrayOf(weeklyMap.values).contentToString()
+    println("hej er: $hej")
+
+
+    //println("test er: ${(arrayOf(test).contentToString())}")
+
+
+
+//    val gson = Gson()
+//    val type = object: TypeToken<Map<String, Any>>(){}.type
+//    println("type er: $type")
+//    val newMap: Map<String, Any> = gson.fromJson(weeklyData, type)
+//
+//    println("\n nyt map: $newMap")
 }
 
 enum class TimeInterval {

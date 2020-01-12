@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--layout for the blue text fields-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <include layout="@layout/widget_blue_box"/>
+        <include layout="@layout/widget_blue_box"/>
+        <include layout="@layout/widget_blue_box"/>
+        <include layout="@layout/widget_blue_box"/>
+        <include layout="@layout/widget_blue_box"/>
+    </LinearLayout>
+
+    <!--layout for the bottom white bar-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include layout="@layout/widget_white_bar"/>
+
+    </LinearLayout>
+
+</LinearLayout>
