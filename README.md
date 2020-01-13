@@ -8,9 +8,9 @@ This is an <code>Android</code> app written in <code>Kotlin</code>. The purpose 
 Mock-up made in Figma. Showed on an OnePlus 7T Pro.
 
 <h2>JSON</h2>
-This is how the <code>consumptions</code> looks in the <code>data</code> array in the <code>JSON</code>.
-```javascript
-"consumptions": [
+
+```yaml 
+   "consumptions": [
                 {
                     "start": "2019-11-23T23:00:00.000Z",
                     "end": "2019-11-24T23:00:00.000Z",
@@ -34,3 +34,4 @@ This is how the <code>consumptions</code> looks in the <code>data</code> array i
                     }
                 },
 ```
+This is how the <code>consumptions</code> looks in the <code>data</code> array in the <code>JSON</code>.
