@@ -6,8 +6,10 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
-import kotlin.collections.ArrayList
+import org.json.JSONObject
+import org.json.JSONArray
+
+
 
 
 fun main() {
@@ -18,33 +20,38 @@ fun main() {
     val map = authenticate(email, pass)
     //externalID and token is how you retrieve data from the other API calls
     val externalID = map["external_id"]
-    val authToken = map["token"]
+    val token = map["token"]
 
-    val weeklyMap = getUsage(externalID!!, authToken!!, TimeInterval.weekly)
+    val weeklyMap = getConsumptions(externalID!!, token!!, TimeInterval.weekly)
+    println("size er: $weeklyMap")
+
+    val consumptions = (((weeklyMap["data"] as ArrayList<*>)[0]) as Map<*, *>)["consumptions"] as ArrayList<*>
+    //val consumptions = weeklyMap["data"]!![0]!!["consumptions"] as ArrayList<*>
+    println("consumption er: $consumptions")
+
+    println("consumption 3 er ${consumptions[3]}")
+
+    consumptions[0] as Map<*, *>
 
     println()
-    /**
-     * virker ikke
-     */
-
-    //println("size er: ${weeklyMap}")
-
-    val test: Collection<String> = weeklyMap.values
-
-    val hej = arrayOf(weeklyMap.values).contentToString()
-    println("hej er: $hej")
-
 
     //println("test er: ${(arrayOf(test).contentToString())}")
-
-
-
-//    val gson = Gson()
-//    val type = object: TypeToken<Map<String, Any>>(){}.type
-//    println("type er: $type")
-//    val newMap: Map<String, Any> = gson.fromJson(weeklyData, type)
+//    val json = JSONObject(str)
+//    val bank = json.getString("bank")
+//    tv.append("\n\n=== Oversigt over " + bank + "s kunder ===\n")
+//    var totalKredit = 0.0
 //
-//    println("\n nyt map: $newMap")
+//    val kunder = json.getJSONArray("kunder")
+//    val antal = kunder.length()
+//    for (i in 0 until antal) {
+//        val kunde = kunder.getJSONObject(i)
+//        System.err.println("obj = $kunde")
+//        val navn = kunde.getString("navn")
+//        val kredit = kunde.getDouble("kredit")
+//        tv.append(navn + " med " + kredit + " kr.\n")
+//        totalKredit = totalKredit + kredit
+//    }
+
 }
 
 enum class TimeInterval {
@@ -98,7 +105,7 @@ fun authenticate(email: String, password: String): Map<String, String> {
     return gson.fromJson(response.toString(), mapType)
 }
 
-fun getUsage(externalID: String, token: String, interval: TimeInterval): Map<String, String> {
+fun getConsumptions(externalID: String, token: String, interval: TimeInterval): Map<String, String> {
     //url to authenticate POST method
     val mURL = URL("https://prod.copi.obviux.dk/consumptionPage/$externalID/$interval")
 
