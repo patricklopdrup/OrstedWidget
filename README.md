@@ -34,4 +34,4 @@ Mock-up made in Figma. Showed on an OnePlus 7T Pro.
                     }
                 },
 ```
-This is how the <code>consumptions</code> looks in the <code>data</code> array in the <code>JSON</code>.
+This is how some of the <code>consumptions</code> looks in the <code>data</code> array in the <code>JSON</code>.
