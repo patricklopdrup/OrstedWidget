@@ -1,16 +1,20 @@
 package com.example.orstedwidget
 
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import org.json.JSONObject
-import org.json.JSONArray
 
 
-
+data class WeeklyConsumption(
+    val start: String,
+    val end: String,
+    val kWh: Double,
+    val COPI: HashMap<String, String>
+)
 
 fun main() {
     val email = ""
@@ -22,35 +26,38 @@ fun main() {
     val externalID = map["external_id"]
     val token = map["token"]
 
-    val weeklyMap = getConsumptions(externalID!!, token!!, TimeInterval.weekly)
-    println("size er: $weeklyMap")
+    val weeklyJson = getConsumptions(externalID!!, token!!, TimeInterval.weekly)
+    println("size er: $weeklyJson")
 
-    val consumptions = (((weeklyMap["data"] as ArrayList<*>)[0]) as Map<*, *>)["consumptions"] as ArrayList<*>
-    //val consumptions = weeklyMap["data"]!![0]!!["consumptions"] as ArrayList<*>
-    println("consumption er: $consumptions")
+    //parsing our String to json
+    val json = JsonParser().parse(weeklyJson)
+    //finding the data array in JSON
+    val dataArray = json.asJsonObject["data"].asJsonArray
+    //finding the consumptions array at index 0 in dataArray
+    val consumptions = dataArray[0].asJsonObject["consumptions"].asJsonArray
+    println("consumptions: $consumptions")
 
-    println("consumption 3 er ${consumptions[3]}")
+    //list of the data classes "WeeklyConsumption"
+    val weeklyConsumptions = ArrayList<WeeklyConsumption>()
+    //looping through all consumptions element in the json file
+    for (i in 0 until consumptions.size()) {
+        var start = consumptions[i].asJsonObject["start"].asString
+        var end = consumptions[i].asJsonObject["end"].asString
+        var kWh = consumptions[i].asJsonObject["kWh"].asDouble
 
-    consumptions[0] as Map<*, *>
+        //COPI is a map in the json file
+        var copiMap = HashMap<String, String>()
+        var copi = consumptions[i].asJsonObject["COPI"].asJsonObject
 
-    println()
+        copiMap["xAxisLabel"] = copi["xAxisLabel"].asString
+        copiMap["currentConsumptionPrefix"] = copi["currentConsumptionPrefix"].asString
+        copiMap["unit"] = copi["unit"].asString
 
-    //println("test er: ${(arrayOf(test).contentToString())}")
-//    val json = JSONObject(str)
-//    val bank = json.getString("bank")
-//    tv.append("\n\n=== Oversigt over " + bank + "s kunder ===\n")
-//    var totalKredit = 0.0
-//
-//    val kunder = json.getJSONArray("kunder")
-//    val antal = kunder.length()
-//    for (i in 0 until antal) {
-//        val kunde = kunder.getJSONObject(i)
-//        System.err.println("obj = $kunde")
-//        val navn = kunde.getString("navn")
-//        val kredit = kunde.getDouble("kredit")
-//        tv.append(navn + " med " + kredit + " kr.\n")
-//        totalKredit = totalKredit + kredit
-//    }
+        //adding to the array of the data class "WeeklyConsumption"
+        weeklyConsumptions.add(WeeklyConsumption(start, end, kWh, copiMap))
+    }
+
+    weeklyConsumptions.forEach { println("hej $it") }
 
 }
 
@@ -105,7 +112,7 @@ fun authenticate(email: String, password: String): Map<String, String> {
     return gson.fromJson(response.toString(), mapType)
 }
 
-fun getConsumptions(externalID: String, token: String, interval: TimeInterval): Map<String, String> {
+fun getConsumptions(externalID: String, token: String, interval: TimeInterval): String {
     //url to authenticate POST method
     val mURL = URL("https://prod.copi.obviux.dk/consumptionPage/$externalID/$interval")
 
@@ -132,10 +139,11 @@ fun getConsumptions(externalID: String, token: String, interval: TimeInterval): 
         response.append(responseLine!!.trim())
     }
 
+    return response.toString()
     //using Gson to parse the JSON response to a Map
-    val gson = Gson()
-    val mapType = object : TypeToken<Map<String, Any>>() {}.type
-
-    println(response.toString())
-    return gson.fromJson(response.toString(), mapType)
+//    val gson = Gson()
+//    val mapType = object : TypeToken<Map<String, Any>>() {}.type
+//
+//    println(response.toString())
+//    return gson.fromJson(response.toString(), mapType)
 }
