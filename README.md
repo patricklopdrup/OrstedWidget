@@ -34,4 +34,8 @@ Mock-up made in Figma. Showed on an OnePlus 7T Pro.
                     }
                 },
 ```
-This is how some of the <code>consumptions</code> looks in the <code>data</code> array in the <code>JSON</code>.
+Here is how some of the <code>consumptions</code> objects looks in the <code>data</code> array in the <code>JSON</code>.</br></br>
+This is by using the <code>HTTP</code> request:
+```kotlin
+   https://prod.copi.obviux.dk/consumptionPage/${my_external_id}/daily
+```
