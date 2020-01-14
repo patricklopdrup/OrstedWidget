@@ -20,14 +20,26 @@ fun main() {
     val token = map["token"]
 
     val weeklyJson: String = getConsumptions(externalID!!, token!!, TimeInterval.weekly)
-    println("size er: $weeklyJson")
+    println("json stringen er: $weeklyJson")
 
-    println(getConsumptionDataClassList(weeklyJson)[1].kWh)
+    println("kwh er: ${getConsumptionDataList(weeklyJson)[4].kWh}")
+
+    //println("kwh er: ${getData(email, pass, TimeInterval.daily)[0].kWh}")
 
 }
 
 enum class TimeInterval {
     hourly, daily, weekly, monthly, yearly
+}
+
+fun getData(email: String, password: String, interval: TimeInterval): List<ConsumptionData> {
+    val authMap = authenticate(email, password)
+    val externalID = authMap["external_id"]
+    val token = authMap["token"]
+
+    val jsonData = getConsumptions(externalID!!, token!!, interval)
+
+    return getConsumptionDataList(jsonData)
 }
 
 /**
@@ -36,7 +48,7 @@ enum class TimeInterval {
  * @param jsonData the json for a specific interval as a String. Get with "getConsumptions()"
  * @return a list of ConsumptionData
  */
-fun getConsumptionDataClassList(jsonData: String): List<ConsumptionData> {
+fun getConsumptionDataList(jsonData: String): List<ConsumptionData> {
     //parsing our String to json
     val json = JsonParser().parse(jsonData)
     //finding the data array in JSON
@@ -132,10 +144,16 @@ fun getConsumptions(externalID: String, token: String, interval: TimeInterval): 
     //url get consumptions for a specific interval. E.g. daily, weekly, monthly.
     val mURL = URL("https://prod.copi.obviux.dk/consumptionPage/$externalID/$interval")
 
+    //printing URL
+    println("URL: $mURL")
+
     //make a connection
     val conn = mURL.openConnection() as HttpURLConnection
 
     conn.requestMethod = "GET"
+
+    //printing HTTP response code
+    //println("response code: ${conn.responseCode}")
 
     //setting headers
     conn.setRequestProperty("authority", "prod.copi.obviux.dk")
