@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="#fff">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="start">
 
         <Button
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="Timer"
-            android:textSize="12sp"
+            android:id="@+id/white_button_up"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/button_border"
-            android:padding="-10dp"/>
+            android:text="ʌ"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"/>
 
         <Button
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="Dage"
-            android:textSize="12sp"
-            android:background="@drawable/button_border" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="Uger"
-            android:textSize="12sp"
-            android:background="@drawable/button_border" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="Måneder"
-            android:textSize="12sp"
-            android:background="@drawable/button_border" />
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:text="År"
-            android:textSize="12sp"
-            android:background="@drawable/button_border" />
+            android:id="@+id/white_button_down"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_border"
+            android:text="v"
+            android:textAlignment="center"
+            android:textSize="12sp"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="end"
         android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/white_button_left"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_border"
+            android:text="&lt;"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:layout_marginEnd="5dp"/>
 
+        <Button
+            android:id="@+id/white_button_right"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_border"
+            android:text="&gt;"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:layout_marginEnd="5dp"/>
 
     </LinearLayout>
 
