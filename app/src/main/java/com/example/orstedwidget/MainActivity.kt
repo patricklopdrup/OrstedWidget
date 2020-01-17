@@ -16,47 +16,31 @@ class MainActivity : AppCompatActivity() {
         val email = ""
         val pass = ""
 
-        println("hello")
         CoroutineScope(IO).launch {
-            network(email, pass, TimeInterval.weekly)
+            network(email, pass, TimeInterval.monthly)
         }
 
     }
 
     suspend fun network(email: String, pass: String, interval: TimeInterval) {
+        //authenticate user
+        val auth: Map<String, String> = authenticate(email, pass)
+        println("fået auth")
 
-//        val hej = getData(email, pass, interval)
-//        hej.forEach { println("hej: $it") }
-        val email = ""
-        val pass = ""
+        //take externalID and token from auth
+        val externalID = auth["external_id"]
+        val token = auth["token"]
+        println("id: $externalID og token: $token")
 
-        //saves the return of the authentication in a Map
-        val map = authenticate(email, pass)
-        //externalID and token is how you retrieve data from the other API calls
-        val externalID = map["external_id"]
-        val token = map["token"]
+        //get the consumption data
+        val jsonData: String = getConsumptions(externalID!!, token!!, interval)
+        println("fået json")
 
-        val weeklyJson: String = getConsumptions(externalID!!, token!!, TimeInterval.weekly)
-        println("json stringen er: $weeklyJson")
+        //make a list of consumption data
+        val consumptionList: List<ConsumptionData> = getConsumptionDataList(jsonData)
+        println("fået list")
 
-        println("kwh er: ${getConsumptionDataList(weeklyJson)[4].kWh}")
-
-
-//        val auth: Map<String, String> = authenticate(email, pass)
-//        println("fået auth")
-//        val externalID = auth["external_id"]
-//        val token = auth["token"]
-//        println("id: $externalID og token: $token")
-//        setTextOnMainThread(externalID.toString())
-        /**
-         * virker her til. jeg kan sætte min tekst til min external_id
-         */
-//        val jsonData: String = getConsumptions(externalID!!, token!!, interval)
-//        println("fået json")
-//        val consumptionList: List<ConsumptionData> = getConsumptionDataList(jsonData)
-//        println("fået list")
-//
-//        setTextOnMainThread(consumptionList[1].kWh.toString())
+        setTextOnMainThread(consumptionList[4].kWh.toString())
 
     }
 

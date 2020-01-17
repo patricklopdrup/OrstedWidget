@@ -7,7 +7,6 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import javax.net.ssl.HttpsURLConnection
 
 
 fun main() {
@@ -25,8 +24,6 @@ fun main() {
 
     println("kwh er: ${getConsumptionDataList(weeklyJson)[4].kWh}")
 
-    //println("kwh er: ${getData(email, pass, TimeInterval.daily)[0].kWh}")
-
 }
 
 enum class TimeInterval {
@@ -42,14 +39,6 @@ fun getData(email: String, password: String, interval: TimeInterval): List<Consu
 
     return getConsumptionDataList(jsonData)
 }
-
-/**
- * To get a list of ConsumptionData
- *
- * @param jsonData the json for a specific interval as a String. Get with "getConsumptions()"
- * @return a list of ConsumptionData
- */
-
 
 /**
  * To authenticate the user with email and password. "external_id" and "token" can be retrieved.
@@ -75,7 +64,7 @@ fun authenticate(email: String, password: String): Map<String, String> {
     conn.setRequestProperty("x-customer-ip", "194.251.71.73")
     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8")
 
-    //to get output
+    //to get output (will also make it POST (do NOT use in GET method))
     conn.doOutput = true
 
     //setting the body (in JSON) with credentials
@@ -126,25 +115,14 @@ fun getConsumptions(externalID: String, token: String, interval: TimeInterval): 
 
     conn.requestMethod = "GET"
 
-    //printing HTTP response code
-    //println("response code: ${conn.responseCode}")
-
     //setting headers
     conn.setRequestProperty("authority", "prod.copi.obviux.dk")
     conn.setRequestProperty("Accept", "application/json, text/plain, */*")
     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8")
-//    conn.setRequestProperty("qqqauthorization", token)
-//    conn.setRequestProperty("x-authorization", token)
-//    conn.setRequestProperty("Authorization", token)
-//    conn.setRequestProperty("X-Authorization", token)
-
-    //to get output
-    conn.doOutput = true
+    conn.setRequestProperty("authorization", token)
 
     //read the data
     val response = StringBuilder()
-    println(conn.responseCode)
-    println(conn.responseMessage)
 
     val br = BufferedReader(InputStreamReader(conn.inputStream, "utf-8"))
     var responseLine: String?
@@ -156,6 +134,12 @@ fun getConsumptions(externalID: String, token: String, interval: TimeInterval): 
     return response.toString()
 }
 
+/**
+ * To get a list of ConsumptionData
+ *
+ * @param jsonData the json for a specific interval as a String. Get with "getConsumptions()"
+ * @return a list of ConsumptionData
+ */
 fun getConsumptionDataList(jsonData: String): List<ConsumptionData> {
     //parsing our String to json
     val json = JsonParser().parse(jsonData)
