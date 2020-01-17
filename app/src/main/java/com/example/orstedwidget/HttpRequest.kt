@@ -7,6 +7,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import javax.net.ssl.HttpsURLConnection
 
 
 fun main() {
@@ -48,34 +49,7 @@ fun getData(email: String, password: String, interval: TimeInterval): List<Consu
  * @param jsonData the json for a specific interval as a String. Get with "getConsumptions()"
  * @return a list of ConsumptionData
  */
-fun getConsumptionDataList(jsonData: String): List<ConsumptionData> {
-    //parsing our String to json
-    val json = JsonParser().parse(jsonData)
-    //finding the data array in JSON
-    val dataArray = json.asJsonObject["data"].asJsonArray
-    //finding the consumptions array at index 0 in dataArray
-    val consumptions = dataArray[0].asJsonObject["consumptions"].asJsonArray
 
-    //list of the data classes "WeeklyConsumption"
-    val consumptionList = ArrayList<ConsumptionData>()
-    //looping through all consumptions element in the json file
-    for (i in 0 until consumptions.size()) {
-        val start = consumptions[i].asJsonObject["start"].asString
-        val end = consumptions[i].asJsonObject["end"].asString
-        val kWh = consumptions[i].asJsonObject["kWh"].asDouble
-
-        //COPI is a map in the json file
-        val copiMap = HashMap<String, String>()
-        val copi = consumptions[i].asJsonObject["COPI"].asJsonObject
-
-        copiMap["xAxisLabel"] = copi["xAxisLabel"].asString
-        copiMap["currentConsumptionPrefix"] = copi["currentConsumptionPrefix"].asString
-        copiMap["unit"] = copi["unit"].asString
-
-        consumptionList.add(ConsumptionData(start, end, kWh, copiMap))
-    }
-    return consumptionList
-}
 
 /**
  * To authenticate the user with email and password. "external_id" and "token" can be retrieved.
@@ -159,13 +133,18 @@ fun getConsumptions(externalID: String, token: String, interval: TimeInterval): 
     conn.setRequestProperty("authority", "prod.copi.obviux.dk")
     conn.setRequestProperty("Accept", "application/json, text/plain, */*")
     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8")
-    conn.setRequestProperty("authorization", token)
+//    conn.setRequestProperty("qqqauthorization", token)
+//    conn.setRequestProperty("x-authorization", token)
+//    conn.setRequestProperty("Authorization", token)
+//    conn.setRequestProperty("X-Authorization", token)
 
     //to get output
     conn.doOutput = true
 
     //read the data
     val response = StringBuilder()
+    println(conn.responseCode)
+    println(conn.responseMessage)
 
     val br = BufferedReader(InputStreamReader(conn.inputStream, "utf-8"))
     var responseLine: String?
@@ -175,4 +154,33 @@ fun getConsumptions(externalID: String, token: String, interval: TimeInterval): 
 
     //returning the output as a String
     return response.toString()
+}
+
+fun getConsumptionDataList(jsonData: String): List<ConsumptionData> {
+    //parsing our String to json
+    val json = JsonParser().parse(jsonData)
+    //finding the data array in JSON
+    val dataArray = json.asJsonObject["data"].asJsonArray
+    //finding the consumptions array at index 0 in dataArray
+    val consumptions = dataArray[0].asJsonObject["consumptions"].asJsonArray
+
+    //list of the data classes "WeeklyConsumption"
+    val consumptionList = ArrayList<ConsumptionData>()
+    //looping through all consumptions element in the json file
+    for (i in 0 until consumptions.size()) {
+        val start = consumptions[i].asJsonObject["start"].asString
+        val end = consumptions[i].asJsonObject["end"].asString
+        val kWh = consumptions[i].asJsonObject["kWh"].asDouble
+
+        //COPI is a map in the json file
+        val copiMap = HashMap<String, String>()
+        val copi = consumptions[i].asJsonObject["COPI"].asJsonObject
+
+        copiMap["xAxisLabel"] = copi["xAxisLabel"].asString
+        copiMap["currentConsumptionPrefix"] = copi["currentConsumptionPrefix"].asString
+        copiMap["unit"] = copi["unit"].asString
+
+        consumptionList.add(ConsumptionData(start, end, kWh, copiMap))
+    }
+    return consumptionList
 }

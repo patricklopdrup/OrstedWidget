@@ -27,14 +27,27 @@ class MainActivity : AppCompatActivity() {
 
 //        val hej = getData(email, pass, interval)
 //        hej.forEach { println("hej: $it") }
+        val email = ""
+        val pass = ""
+
+        //saves the return of the authentication in a Map
+        val map = authenticate(email, pass)
+        //externalID and token is how you retrieve data from the other API calls
+        val externalID = map["external_id"]
+        val token = map["token"]
+
+        val weeklyJson: String = getConsumptions(externalID!!, token!!, TimeInterval.weekly)
+        println("json stringen er: $weeklyJson")
+
+        println("kwh er: ${getConsumptionDataList(weeklyJson)[4].kWh}")
 
 
-        val auth: Map<String, String> = authenticate(email, pass)
-        println("fået auth")
-        val externalID = auth["external_id"]
-        val token = auth["token"]
-        println("id: $externalID og token: $token")
-        setTextOnMainThread(externalID.toString())
+//        val auth: Map<String, String> = authenticate(email, pass)
+//        println("fået auth")
+//        val externalID = auth["external_id"]
+//        val token = auth["token"]
+//        println("id: $externalID og token: $token")
+//        setTextOnMainThread(externalID.toString())
         /**
          * virker her til. jeg kan sætte min tekst til min external_id
          */
