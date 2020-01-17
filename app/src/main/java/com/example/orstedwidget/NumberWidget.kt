@@ -3,6 +3,7 @@ package com.example.orstedwidget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.view.View
 import android.widget.RemoteViews
 
 /**
@@ -35,12 +36,17 @@ internal fun updateAppWidget(
     appWidgetId: Int
 ) {
 
-
-
-    val widgetText = context.getString(R.string.appwidget_text)
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.widget)
     //views.setTextViewText(R.id.appwidget_text, widgetText)
+
+
+
+    views.setTextViewText(R.id.blue_button_kwh, "hej")
+    val hej = RemoteViews(context.packageName, R.id.blue_button_3)
+    println("layout id: ${hej.layoutId}")
+    hej.setTextViewText(R.id.blue_button_kwh, "orale")
+
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
