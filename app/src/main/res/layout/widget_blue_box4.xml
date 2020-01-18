@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="68dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#4099da"
+    android:paddingStart="7dp"
+    android:paddingEnd="7dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:layout_marginEnd="1dp"
+    android:layout_marginStart="1dp">
+
+    <TextView
+        android:id="@+id/blue_button_date4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="22. jan '20"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:textColor="@android:color/white"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/blue_button_kwh4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="02,22"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:paddingBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/blue_button_day4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Man"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

@@ -1,13 +1,18 @@
 package com.example.orstedwidget
 
+import android.appwidget.AppWidgetManager
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var consumptionList: List<ConsumptionData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +42,16 @@ class MainActivity : AppCompatActivity() {
         println("fået json")
 
         //make a list of consumption data
-        val consumptionList: List<ConsumptionData> = getConsumptionDataList(jsonData)
+        consumptionList = getConsumptionDataList(jsonData)
         println("fået list")
-
         setTextOnMainThread(consumptionList[4].kWh.toString())
+
+        val gson = Gson()
+        val listAsString = gson.toJson(consumptionList)
+        //intent = Intent(this, NumberWidget::class.java)
+        intent.putExtra(this.getString(R.string.intent_key_list), listAsString)
+
+        sendBroadcast(intent)
 
     }
 

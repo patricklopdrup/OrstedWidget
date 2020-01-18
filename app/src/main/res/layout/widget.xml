@@ -14,11 +14,11 @@
         android:background="#fff"
         android:paddingTop="5dp">
 
-        <include layout="@layout/widget_blue_box" android:id="@+id/blue_button_1"/>
-        <include layout="@layout/widget_blue_box" android:id="@+id/blue_button_2"/>
-        <include layout="@layout/widget_blue_box" android:id="@+id/blue_button_3"/>
-        <include layout="@layout/widget_blue_box" android:id="@+id/blue_button_4"/>
-        <include layout="@layout/widget_blue_box" android:id="@+id/blue_button_5"/>
+        <include layout="@layout/widget_blue_box1" android:id="@+id/blue_button_1"/>
+        <include layout="@layout/widget_blue_box2" android:id="@+id/blue_button_2"/>
+        <include layout="@layout/widget_blue_box3" android:id="@+id/blue_button_3"/>
+        <include layout="@layout/widget_blue_box4" android:id="@+id/blue_button_4"/>
+        <include layout="@layout/widget_blue_box5" android:id="@+id/blue_button_5"/>
     </LinearLayout>
 
     <!--layout for the bottom white bar-->

@@ -148,7 +148,7 @@ fun getConsumptionDataList(jsonData: String): List<ConsumptionData> {
     //finding the consumptions array at index 0 in dataArray
     val consumptions = dataArray[0].asJsonObject["consumptions"].asJsonArray
 
-    //list of the data classes "WeeklyConsumption"
+    //list of the data classes "ConsumptionData"
     val consumptionList = ArrayList<ConsumptionData>()
     //looping through all consumptions element in the json file
     for (i in 0 until consumptions.size()) {
@@ -164,7 +164,9 @@ fun getConsumptionDataList(jsonData: String): List<ConsumptionData> {
         copiMap["currentConsumptionPrefix"] = copi["currentConsumptionPrefix"].asString
         copiMap["unit"] = copi["unit"].asString
 
-        consumptionList.add(ConsumptionData(start, end, kWh, copiMap))
+        if(kWh != 0.0) {
+            consumptionList.add(ConsumptionData(start, end, kWh, copiMap))
+        }
     }
     return consumptionList
 }
