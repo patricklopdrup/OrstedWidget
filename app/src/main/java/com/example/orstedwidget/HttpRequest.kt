@@ -40,6 +40,14 @@ fun getData(email: String, password: String, interval: TimeInterval): List<Consu
     return getConsumptionDataList(jsonData)
 }
 
+fun getJsonData(email: String, password: String, interval: TimeInterval): String {
+    val authMap = authenticate(email, password)
+    val externalID = authMap["external_id"]
+    val token = authMap["token"]
+
+    return getConsumptions(externalID!!, token!!, interval)
+}
+
 /**
  * To authenticate the user with email and password. "external_id" and "token" can be retrieved.
  * Those are used for getting the consumptions

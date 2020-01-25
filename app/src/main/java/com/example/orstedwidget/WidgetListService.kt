@@ -3,22 +3,19 @@ package com.example.orstedwidget
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
-import android.os.SystemClock
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 
 class WidgetListService : RemoteViewsService() {
     override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
+
         return WidgetItemFactory(applicationContext, intent!!)
     }
 
     class WidgetItemFactory : RemoteViewsFactory {
         var context: Context
         var appWidgetId: Int = 0
-        val testData = arrayOf("hej", "med", "dig", "hvordan", "går", "det")
+        var jsonData: String?
         lateinit var consumptionList: List<ConsumptionData>
 
         constructor(context: Context, intent: Intent) {
@@ -27,14 +24,13 @@ class WidgetListService : RemoteViewsService() {
                 AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID
             )
+            this.jsonData = intent.getStringExtra(context.getString(R.string.json_data_key))
         }
 
         override fun onCreate() {
-            CoroutineScope(IO).launch {
-                consumptionList = getData("", "", TimeInterval.daily)
-            }
-            SystemClock.sleep(3000)
-            println("i onCreate")
+            println("er i oncreate")
+            //parsing the String of data to a list of ConsumptionData
+            consumptionList = getConsumptionDataList(jsonData!!)
         }
 
         override fun getLoadingView(): RemoteViews? {

@@ -4,4 +4,20 @@
     <string name="add_widget">Add widget</string>
 
     <string name="intent_key_list">list_value</string>
+    <string name="json_data_key">json_data_key</string>
+    <string name="email_key">my_email_key</string>
+    <string name="password_key">my_password_key</string>
+    <string name="sharedPrefs_log_in_key">log_in_sharedprefs</string>
+
+    <string name="empty_text">empty</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="welcome">Hi %s</string>
+    <string name="week_usage_kwh">This week you have used %.2f kWh</string>
+    <string name="scroll_view_text">scroll view text</string>
+    <string name="log_out">Log out</string>
+
 </resources>
