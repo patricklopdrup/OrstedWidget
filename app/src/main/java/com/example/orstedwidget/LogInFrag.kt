@@ -72,20 +72,6 @@ class LogInFrag : Fragment() {
             log_in_password.error = null
         }
 
-        //check for repeat password
-        val passwordRepeat = log_in_password_repeat.text.toString()
-        if(passwordRepeat.isEmpty()) {
-            log_in_password_repeat.error = "Repeat password"
-            valid = false
-        } else {
-            log_in_password_repeat.error = null
-        }
-
-        if(password != passwordRepeat) {
-            log_in_password_repeat.error = "Passwords are not the same"
-            valid = false
-        }
-
         return valid
     }
 
