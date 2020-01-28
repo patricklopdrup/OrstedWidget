@@ -36,6 +36,10 @@ class WelcomeFrag : Fragment() {
         sharedPref = context!!.getSharedPreferences(resources.getString(R.string.sharedPrefs_log_in_key), Context.MODE_PRIVATE)
         editor = sharedPref.edit()
 
+        //setting the user as "logged in" in sharedprefs
+        editor.putBoolean(resources.getString(R.string.is_logged_in_key), true)
+        editor.apply()
+
         //getting first name from sharedprefs
         val firstName = sharedPref.getString(resources.getString(R.string.first_name_key), resources.getString(R.string.empty_text))
         email = sharedPref.getString(resources.getString(R.string.email_key), resources.getString(R.string.empty_text))!!
@@ -45,22 +49,18 @@ class WelcomeFrag : Fragment() {
         welcomeTitle = layout.findViewById(R.id.welcome_title)
         welcomeTitle.text = resources.getString(R.string.welcome, firstName)
 
-//        //testing
-//        editor.putFloat(resources.getString(R.string.kwh_this_week_key), 99.9f)
-//        editor.apply()
-
         //setting saved (old) data on screen from sharedprefs
         weekUsage = layout.findViewById(R.id.welcome_week_usage_text)
         val oldKwhData = sharedPref.getFloat(resources.getString(R.string.kwh_this_week_key), 0.0f)
         val oldPrefix = sharedPref.getString(resources.getString(R.string.consumption_prefix_key), resources.getString(R.string.loading_text))
         weekUsage.text = resources.getString(R.string.week_usage_kwh, oldPrefix, oldKwhData)
-        //retrieving new data
+        //retrieving new data and updating data on screen
         getThisWeek()
 
         //log out button on click listener
         logOutButton = layout.findViewById(R.id.welcome_log_out_button)
         logOutButton.setOnClickListener {
-            //clear the sharedprefs
+            //clear the sharedprefs (also means clearing the "is_logged_in" boolean)
             editor.clear()
             editor.apply()
 
@@ -79,7 +79,7 @@ class WelcomeFrag : Fragment() {
                 getData(email, password, TimeInterval.weekly)
             }
             val kwhThisWeek: Float = result[result.lastIndex].kWh.toFloat()
-            val prefixThisWeek: String = result[result.lastIndex].COPI["currentConsumptionPrefix"]!!
+            val prefixThisWeek: String = result[result.lastIndex].COPI[resources.getString(R.string.copi_currentConsumptionPrefix)]!!
             //saving new data in sharedprefs
             editor.putFloat(resources.getString(R.string.kwh_this_week_key), kwhThisWeek)
             editor.putString(resources.getString(R.string.consumption_prefix_key), prefixThisWeek)

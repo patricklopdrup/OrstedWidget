@@ -3,6 +3,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
 
+    <!--keys for shared prefs-->
     <string name="intent_key_list">list_value</string>
     <string name="json_data_key">json_data_key</string>
     <string name="email_key">my_email_key</string>
@@ -11,6 +12,20 @@
     <string name="first_name_key">first_name_key</string>
     <string name="kwh_this_week_key">kwh_this_week_key</string>
     <string name="consumption_prefix_key">consumption_prefix_key</string>
+    <string name="is_logged_in_key">is_logged_in_key</string>
+
+    <!--consumption data COPI array-->
+    <string name="copi_x_axis_label">xAxisLabel</string>
+    <string name="copi_currentConsumptionPrefix">currentConsumptionPrefix</string>
+    <string name="copi_unit">unit</string>
+    <string name="copi_current_consumption">currentConsumption</string>
+
+    <!--auth data-->
+    <string name="auth_email">email</string>
+    <string name="auth_phone_nr">phone</string>
+    <string name="auth_first_name">first_name</string>
+    <string name="auth_last_name">last_name</string>
+    <string name="auth_birthdate">birthdate</string>
 
     <string name="empty_text">empty</string>
     <string name="loading_text">Loading…</string>

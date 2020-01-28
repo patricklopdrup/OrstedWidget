@@ -25,6 +25,15 @@ class LogInFrag : Fragment() {
     ): View? {
         val layout = inflater.inflate(R.layout.frag_log_in, container, false)
 
+        //if the user is already logged in we skip the loading screen and jump to welcome page
+        val sharedPrefs = context!!.getSharedPreferences(resources.getString(R.string.sharedPrefs_log_in_key), Context.MODE_PRIVATE)
+        val isLoggedIn: Boolean = sharedPrefs.getBoolean(resources.getString(R.string.is_logged_in_key), false)
+        if(isLoggedIn) {
+            fragmentManager!!.beginTransaction()
+                .replace(R.id.main_frameLayout, WelcomeFrag())
+                .commit()
+        }
+
         logInButton = layout.findViewById(R.id.log_in_button)
 
         //on click listener

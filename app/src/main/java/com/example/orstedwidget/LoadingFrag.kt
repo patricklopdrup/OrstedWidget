@@ -47,7 +47,7 @@ class LoadingFrag : Fragment() {
                 val result = withContext(IO) {
                     authenticate(email, password)
                 }
-                firstName = result.getValue("first_name")
+                firstName = result.getValue(resources.getString(R.string.auth_first_name))
                 println("firstname: $firstName")
 
                 //adding first name to shared prefs
@@ -55,7 +55,7 @@ class LoadingFrag : Fragment() {
                 editor.putString(resources.getString(R.string.first_name_key), firstName)
                 editor.apply()
 
-                //
+                //if the user is in the database, we go to welcome page
                 fragmentManager!!.beginTransaction()
                     .replace(R.id.main_frameLayout, WelcomeFrag())
                     .commit()
