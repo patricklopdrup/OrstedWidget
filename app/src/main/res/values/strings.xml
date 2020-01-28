@@ -8,6 +8,7 @@
     <string name="email_key">my_email_key</string>
     <string name="password_key">my_password_key</string>
     <string name="sharedPrefs_log_in_key">log_in_sharedprefs</string>
+    <string name="first_name_key">first_name_key</string>
 
     <string name="empty_text">empty</string>
 
