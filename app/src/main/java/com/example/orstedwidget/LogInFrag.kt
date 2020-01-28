@@ -13,9 +13,6 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.frag_log_in.*
 
 class LogInFrag : Fragment() {
-    lateinit var emailField: EditText
-    lateinit var passwordField: EditText
-    lateinit var repeatPasswordField: EditText
     lateinit var logInButton: Button
 
     lateinit var email: String
@@ -30,6 +27,7 @@ class LogInFrag : Fragment() {
 
         logInButton = layout.findViewById(R.id.log_in_button)
 
+        //on click listener
         logInButton.setOnClickListener {
             if(!validate()) {
                 println("validation error")
@@ -43,6 +41,10 @@ class LogInFrag : Fragment() {
                 editor.putString(getString(R.string.email_key), email)
                 editor.putString(getString(R.string.password_key), password)
                 editor.apply()
+
+                fragmentManager!!.beginTransaction()
+                    .replace(R.id.main_frameLayout, LoadingFrag())
+                    .commit()
             }
         }
 

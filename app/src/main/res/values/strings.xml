@@ -19,5 +19,6 @@
     <string name="week_usage_kwh">This week you have used %.2f kWh</string>
     <string name="scroll_view_text">scroll view text</string>
     <string name="log_out">Log out</string>
+    <string name="user_not_found">User not found</string>
 
 </resources>
