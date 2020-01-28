@@ -9,16 +9,27 @@
     <string name="password_key">my_password_key</string>
     <string name="sharedPrefs_log_in_key">log_in_sharedprefs</string>
     <string name="first_name_key">first_name_key</string>
+    <string name="kwh_this_week_key">kwh_this_week_key</string>
+    <string name="consumption_prefix_key">consumption_prefix_key</string>
 
     <string name="empty_text">empty</string>
+    <string name="loading_text">Loading…</string>
 
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>
     <string name="repeat_password">Repeat password</string>
     <string name="welcome">Hi %s</string>
-    <string name="week_usage_kwh">This week you have used %.2f kWh</string>
-    <string name="scroll_view_text">scroll view text</string>
+    <string name="week_usage_kwh">%1s %2.2f kWh</string>
+    <string name="scroll_view_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut arcu leo, sollicitudin eget orci lobortis, vehicula luctus felis. Nam suscipit nibh arcu, ut varius nunc tempor in. Sed malesuada ullamcorper rhoncus. Vivamus congue nisl vitae rhoncus euismod. Curabitur consectetur massa eget nulla porttitor, at mollis nisi hendrerit. Nullam placerat eget arcu vitae vestibulum. Etiam sed molestie enim.
+
+Morbi scelerisque elementum nisi pretium interdum. Phasellus aliquam varius massa eu malesuada. Praesent malesuada leo at pellentesque vulputate. Vivamus auctor varius velit, sed volutpat ipsum convallis in. Donec accumsan nisi tellus, vel volutpat neque condimentum sit amet. Sed condimentum metus sit amet risus mattis, nec rutrum nisl feugiat. Fusce feugiat felis sit amet libero dignissim aliquam. Curabitur mi dui, pellentesque vitae mi sagittis, gravida molestie libero. Nullam tincidunt viverra erat ut viverra. Morbi pharetra ligula finibus tristique porttitor. Sed pulvinar blandit semper. Pellentesque in purus ornare, finibus justo quis, faucibus lectus. Cras est diam, maximus sed eros porttitor, facilisis finibus quam. Vivamus ac quam ipsum. Cras eget dolor blandit, porta leo eu, eleifend nulla.
+
+Pellentesque rutrum, massa ut tincidunt cursus, nisi purus gravida velit, vel ultrices massa lacus ut nulla. Donec maximus ex at imperdiet pulvinar. Sed ultrices molestie enim in fringilla. Etiam nibh metus, suscipit sed dolor et, faucibus rutrum orci. Fusce pellentesque efficitur justo vitae imperdiet. Vivamus rhoncus ex et dui consectetur, id auctor massa rhoncus. Proin sodales purus non ipsum sollicitudin placerat vel eu est.
+
+Ut tempus gravida nunc. Vestibulum pretium at arcu ut rhoncus. Aliquam mattis facilisis blandit. Proin elementum tortor sit amet magna dictum, eget varius odio hendrerit. Phasellus efficitur mauris arcu. Etiam sollicitudin urna sed ante dictum, nec facilisis urna lobortis. Proin ultricies eget nunc ut laoreet. Duis at metus pharetra, luctus sem ut, ultricies lacus.
+
+Vivamus fermentum dapibus urna vel tincidunt. Proin vulputate dui quis molestie faucibus. Fusce elementum, augue a consectetur maximus, sapien erat imperdiet nisl, nec posuere lorem neque sit amet nisl. Integer non condimentum dolor. Fusce quis interdum mi. Etiam eu lacus at enim sagittis lacinia eu eget dui. Nullam vitae diam commodo lacus auctor placerat. Nam nisi tortor, luctus nec pellentesque eget, tempor condimentum lectus. Etiam facilisis rhoncus rutrum.</string>
     <string name="log_out">Log out</string>
     <string name="user_not_found">User not found</string>
 
