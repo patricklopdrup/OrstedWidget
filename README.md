@@ -41,4 +41,4 @@ This is by using the <code>HTTP</code> request:
 ```
 
 ## ListView widget
-<img src="https://imgur.com/kELu87N.gif" width="180"/>
+<img src="https://imgur.com/dhW6R0n.gif" width="180"/>
