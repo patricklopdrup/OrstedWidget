@@ -39,3 +39,6 @@ This is by using the <code>HTTP</code> request:
 ```kotlin
    https://prod.copi.obviux.dk/consumptionPage/${my_external_id}/daily
 ```
+
+## ListView widget
+<img src="https://imgur.com/aQMjf8W.gif" width="180">
