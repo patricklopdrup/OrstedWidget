@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@drawable/widget_layout_bg">
 
     <TextView
         android:id="@+id/widget_consumption_interval_text"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Dage"
         android:textSize="24sp"
-        android:background="@android:color/white"
+        android:background="@drawable/widget_top_bar_layout"
         android:gravity="center" />
 
     <FrameLayout
@@ -21,7 +21,7 @@
         <ListView
             android:id="@+id/widget_list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/widget_empty_view"

@@ -1,5 +1,7 @@
 package com.example.orstedwidget
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -7,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RemoteViews
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +23,7 @@ class WelcomeFrag : Fragment() {
     lateinit var welcomeTitle: TextView
     lateinit var weekUsage: TextView
     lateinit var logOutButton: Button
+    lateinit var updateButton: Button
     lateinit var email: String
     lateinit var password: String
 
@@ -68,6 +72,16 @@ class WelcomeFrag : Fragment() {
             fragmentManager!!.beginTransaction()
                 .replace(R.id.main_frameLayout, LogInFrag())
                 .commit()
+        }
+
+        //Update the widget within the app
+        updateButton = layout.findViewById(R.id.welcome_update_widget_button)
+        updateButton.setOnClickListener {
+            println("klikker på update")
+            val appwidgetManager = AppWidgetManager.getInstance(context)
+            val thisWidget = ComponentName(context!!, WidgetListProvider::class.java)
+            val appWidgetIds = appwidgetManager.getAppWidgetIds(thisWidget)
+            appwidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list_view)
         }
 
         return layout

@@ -1,16 +1,17 @@
 package com.example.orstedwidget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.widget.RemoteViews
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Implementation of App Widget functionality.
@@ -25,6 +26,7 @@ class WidgetListProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
+        println("i widget update")
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
             val sharedPref = context.getSharedPreferences(
@@ -73,11 +75,26 @@ class WidgetListProvider : AppWidgetProvider() {
         }
     }
 
+    protected fun getPendingSelfIntent(context: Context, action: String): PendingIntent {
+        val intent = Intent(context, javaClass)
+        intent.action = action
+        return PendingIntent.getBroadcast(context,0, intent, 0)
+    }
+
+//    override fun onReceive(context: Context?, intent: Intent?) {
+//        println("i onReceive")
+//        if (MyOnClick == intent!!.action) {
+//            println("hej med dig:)))")
+//        }
+//    }
+
     override fun onEnabled(context: Context) {
         // Enter relevant functionality for when the first widget is created
+        println("første widget")
     }
 
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
+        println("ikke flere widgets")
     }
 }
